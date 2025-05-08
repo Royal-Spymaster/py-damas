@@ -64,6 +64,3 @@ def imprime_tabuleiro():
     print('> ')
 
 #----------Chamada de Funções
-
-faz_tabuleiro()
-imprime_tabuleiro()
