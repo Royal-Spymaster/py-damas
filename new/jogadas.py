@@ -13,6 +13,7 @@ def acessa_tile(tile, i_linha = 0, j_coluna = 0, index = 0):
                     if index != 0:
                         return linha_i,coluna_j     
                     
+                    #Contorno do tabuleiro
                     elif linha_i + i_linha > 7 or linha_i + i_linha < -7:
                         if coluna_j + j_coluna > 7 or coluna_j + j_coluna < -7:
                             return tb.tabuleiro[linha_i][coluna_j]
@@ -54,16 +55,19 @@ def e_dama(tile):
         booleano = True
     return booleano
 
-def come_mais(tile):
-    distancias = [[2,-2,1,-1],[2,2,1,1],[-2,-2,-1,-1],[-2,2,-1,1]]
+def come_mais(tile, peca):
+    distancias_pecas = [[2,-2,1,-1],[2,2,1,1],[-2,-2,-1,-1],[-2,2,-1,1]]
     booleano = False
 
-    for coluna2,linha2,coluna1,linha1 in distancias:
-        if jogador == 0 and e_vazio(tile,coluna2,linha2) == True and e_preto(tile,coluna1,linha1) == True:
-            booleano = True
+    if peca == 0:
+        for coluna2,linha2,coluna1,linha1 in distancias_pecas:
+            if jogador == 0 and e_vazio(tile,coluna2,linha2) == True and e_preto(tile,coluna1,linha1) == True:
+                booleano = True
 
-        elif jogador == 1 and e_vazio(tile,coluna2,linha2) == True and e_branco(tile,coluna1,linha1) == True:
-            booleano = True
+            elif jogador == 1 and e_vazio(tile,coluna2,linha2) == True and e_branco(tile,coluna1,linha1) == True:
+                booleano = True
+    
+    #elif peca == 1:
     return booleano
 
 
