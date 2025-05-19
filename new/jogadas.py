@@ -1,8 +1,7 @@
 #----------Imports----------
 import tabuleiro as tb
-#----------Variáveis Globais
+#----------Variáveis Globais----------
 jogador = 0
-
 #----------Apoio----------
 def acessa_tile(tile, i_linha = 0, j_coluna = 0, index = 0):
 
@@ -28,9 +27,6 @@ def acessa_tile(tile, i_linha = 0, j_coluna = 0, index = 0):
 def calc_dist(q1,q2): 
     return [acessa_tile(q2,0,0,1)[0] - acessa_tile(q1,0,0,1)[0],acessa_tile(q2,0,0,1)[1] - acessa_tile(q1,0,0,1)[1]]
 
-#def varredura_caminho():
-
-
 def e_vazio(tile,i_linha = 0, j_coluna = 0):
     booleano = False
     if acessa_tile(tile, i_linha, j_coluna)[2] == 'Vazio':
@@ -55,21 +51,17 @@ def e_dama(tile):
         booleano = True
     return booleano
 
-def come_mais(tile, peca):
+def come_mais(tile):
     distancias_pecas = [[2,-2,1,-1],[2,2,1,1],[-2,-2,-1,-1],[-2,2,-1,1]]
     booleano = False
 
-    if peca == 0:
-        for coluna2,linha2,coluna1,linha1 in distancias_pecas:
-            if jogador == 0 and e_vazio(tile,coluna2,linha2) == True and e_preto(tile,coluna1,linha1) == True:
-                booleano = True
-
-            elif jogador == 1 and e_vazio(tile,coluna2,linha2) == True and e_branco(tile,coluna1,linha1) == True:
-                booleano = True
+    for coluna2,linha2,coluna1,linha1 in distancias_pecas:
+        if jogador == 0 and e_vazio(tile,coluna2,linha2) == True and e_preto(tile,coluna1,linha1) == True:
+            booleano = True
+        elif jogador == 1 and e_vazio(tile,coluna2,linha2) == True and e_branco(tile,coluna1,linha1) == True:
+            booleano = True
     
-    #elif peca == 1:
     return booleano
-
 
 def analisa_jogada(jogada):
     origem = jogada[:2]
@@ -93,9 +85,6 @@ def analisa_jogada(jogada):
                                 jogador = 0
                         else:
                                 jogador = 1
-
-        #elif e_dama(origem) == True:
-        #    if e_quadrada(dist) == True and somente_um(dist,1) == True:
     
     elif jogador == 1:   
         if e_dama(origem) == False:
@@ -112,6 +101,46 @@ def analisa_jogada(jogada):
                             jogador = 1
                         else:
                             jogador = 0
+
+def define_jogada(jogada):
+    origem = jogada[:2]
+    destino = jogada[3:]
+
+    if e_dama(origem) == False:
+        jogada_peca(origem,destino)
+    
+    #elif e_dama(origem) == True:
+    #    jogada_rainha(origem,destino)
+
+def jogada_peca(origem,destino):
+    global jogador
+    raw_dist = calc_dist(origem,destino)
+    distancia = abs(raw_dist[0])
+
+    if e_vazio(destino) == True:
+        if distancia == 1:
+            if e_branco(origem) and jogador == 0 and (raw_dist == [-1,-1] or raw_dist == [-1,1]):
+                move_peca(origem, destino)
+                jogador = 1
+
+            elif e_preto(origem) and jogador == 1 and (raw_dist == [1,-1] or raw_dist == [1,1]):
+                move_peca(origem, destino)
+                jogador = 0
+        
+        elif distancia == 2:
+            if e_branco(origem) and jogador == 0 and e_preto(origem,raw_dist[0]//2,raw_dist[1]//2) == True:
+                come_peca(origem, destino)
+                if come_mais(destino) == True:
+                    jogador = 0
+                else:
+                    jogador = 1
+
+            elif e_preto(origem) and jogador == 1 and e_branco(origem,raw_dist[0]//2,raw_dist[1]//2) == True:
+                come_peca(origem, destino)
+                if come_mais(destino) == True:
+                    jogador = 1
+                else:
+                    jogador = 0
 
 def procura_promo(jogador):
     
@@ -132,12 +161,9 @@ def move_peca(origem,destino):
 
 def come_peca(origem,destino):
 
-    if e_dama(acessa_tile(origem)[2]) == False:
-        linha = calc_dist(origem,destino)[0]//2
-        coluna = calc_dist(origem,destino)[1]//2
-        acessa_tile(origem,linha,coluna)[2] = 'Vazio'
-        move_peca(origem,destino)
-    
-    #elif e_dama(acessa_tile(origem)[2]) == True:
+    linha = calc_dist(origem,destino)[0]//2
+    coluna = calc_dist(origem,destino)[1]//2
+    acessa_tile(origem,linha,coluna)[2] = 'Vazio'
+    move_peca(origem,destino)
 
 #--------Inputs

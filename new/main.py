@@ -93,15 +93,18 @@ def controla_jogo():
             print('> ')
             print(f'> {jogador_branco}, é a sua vez!')
             jogada = input('> Informe seu movimento. (Ex. C6,D5)')
-            jd.analisa_jogada(jogada)
+            jd.define_jogada(jogada)
             conta_pecas()
+            jd.procura_promo(0)
             tb.imprime_tabuleiro()
         
         elif jd.jogador == 1:
             print('> ')
             print(f'> {jogador_preto}, é a sua vez!')
             jogada = input('> Informe seu movimento. (Ex. D3,C4)')
-            jd.analisa_jogada(jogada)
+            jd.define_jogada(jogada)
+            conta_pecas()
+            jd.procura_promo(1)
             tb.imprime_tabuleiro()
     
     print(f'> Fim de partida!, o vencedor é o {vencedor}!')
