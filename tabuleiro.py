@@ -42,25 +42,62 @@ def faz_tabuleiro():
     return tabuleiro
 
 def imprime_tabuleiro():
-    pecas_imagem = [' ⛀ ',' ⛁ ', ' ⛂ ' , ' ⛃ ','   ']
-    pecas_texto = ['Peça Branca', 'Rainha Branca','Peça Preta','Rainha Preta','Vazio']
-    linhas = []
+    
+    pecas_imagem = {'0': ' ⛀ ',    #0
+                     '1': ' ⛃ ',   #1
+                     '2': ' ⛂ ',   #2
+                     '3': ' ⛃ ',   #3
+                     '4': '    ',   #4
+                     '10':'|⛀ |',  #10
+                     '11':'|⛁ |',  #11
+                     '12':'|⛂ |',  #12
+                     '13':'|⛃ |',  #13
+                     '14':'||||'    #14
+    }
 
-    print('> ')
-    print('>      A    B    C    D    E    F    G    H')
-    print('>     _______________________________________')
+    pecas_texto = ['Peça Branca', 'Rainha Branca','Peça Preta','Rainha Preta','Vazio'] #0,1,2,3,4
+    pecas_tile = ['Quadrado Branco', 'Quadrado Preto'] #0,10
+    linhas = []
 
     for coluna in range(8):
         for linha in range(8):
+            codigo = 0
+            linhas_prontas = []
             for item in pecas_texto:
                 if tabuleiro[coluna][linha][2] == item:
-                    linhas.append(pecas_imagem[pecas_texto.index(item)])
-        linhas_prontas = ' |'.join(linhas)
-        linhas = []
-        print('> ',coluna + 1,'  ','|', linhas_prontas,' |','  ', coluna + 1, sep='')
+                    codigo += pecas_texto.index(item)
+            
+            for item2 in pecas_tile:
+                if tabuleiro[coluna][linha][1] == item2:
+                    codigo += pecas_tile.index(item2)*10
 
-    print('>     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾')
-    print('>      A    B    C    D    E    F    G    H')
-    print('> ')
+            str_codigo = str(codigo)
+            for chave in pecas_imagem:
+                if str_codigo == chave:
+                    linhas.append(pecas_imagem.get(str_codigo))
+
+        linhas_prontas = '|'.join(linhas)
+        linhas = []
+
+        if coluna == 0:
+            print('> ')
+            print('>       A    B    C    D    E    F    G    H')
+            print('>    ┌----┬┬┬┬┬┬----┬┬┬┬┬┬----┬┬┬┬┬┬----┬┬┬┬┬┐')
+            print('> ',coluna + 1,'  ','|', linhas_prontas,'|','  ', coluna + 1, sep='')
+            print('> ',' ','├┬┬┬┬┼┴┴┴┴┼┬┬┬┬┼┴┴┴┴┼┬┬┬┬┼┴┴┴┴┼┬┬┬┬┼┴┴┴┴┤') 
+
+        elif coluna == 7:
+            print('> ',coluna + 1,'  ','|', linhas_prontas,'|','  ', coluna + 1, sep='')
+            print('>    └┴┴┴┴┴----┴┴┴┴┴┴----┴┴┴┴┴┴----┴┴┴┴┴┴----┘')
+            print('>       A    B    C    D    E    F    G    H')
+            print('> ')
+
+        elif coluna % 2 == 0:
+            print('> ',coluna + 1,'  ','|', linhas_prontas,'|','  ', coluna + 1, sep='')
+            print('> ',' ','├┬┬┬┬┼┴┴┴┴┼┬┬┬┬┼┴┴┴┴┼┬┬┬┬┼┴┴┴┴┼┬┬┬┬┼┴┴┴┴┤')     
+
+        else:
+            print('> ',coluna + 1,'  ','|', linhas_prontas,'|','  ', coluna + 1, sep='')
+            print('> ',' ','├┴┴┴┴┼┬┬┬┬┼┴┴┴┴┼┬┬┬┬┼┴┴┴┴┼┬┬┬┬┼┴┴┴┴┼┬┬┬┬┤')            
 
 #----------Chamada de Funções
