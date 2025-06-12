@@ -26,7 +26,7 @@ Só por causa de uma inversão no resultado da come_mais() eu percebi que a cons
 
 ## Update #2
 
-Problemas concertador até aqui, o jogo roda normalmente, sem promover peças. Agora eu vou começar a desenvolver as ações da rainha. A minha ideia é inicial se baseia em ver até onde vão as 4 diagonais e o que tem nelas, quase como eu faço com a analisa jogada. Talvez seja bom modularizar mais o código para fazer com que as funções funcionem com ambas as peças.
+Problemas concertados até aqui, o jogo roda normalmente, sem promover peças. Agora eu vou começar a desenvolver as ações da rainha. A minha ideia é inicial se baseia em ver até onde vão as 4 diagonais e o que tem nelas, quase como eu faço com a analisa jogada. Talvez seja bom modularizar mais o código para fazer com que as funções funcionem com ambas as peças.
 
 ## Update #3
 
@@ -35,3 +35,35 @@ Agora que eu tenho o jogo em git, eu consigo escrever uma "documentação" mais 
 ### Desenvolvimento teórico inicial das interações da rainha com o tabuleiro
 
 A rainha tem interações únicas para tanto para movimentação quanto para comer peças. Resumidamente, a Rainha pode se movimentar livremente pelas diagonais delimitadas por peças da mesma cor, ou por diagonais com somente uma peça da cor oposta. Depois caso a rainha coma uma peça da cor oposta, é preciso analisar se há outras oportunidades de comer outras peças
+
+## Update #4
+
+### Nova diagonal() (Branch Rainhas)
+
+Hoje eu consegui desenvolver um algoritmo que retona todas as diagonais de um quadrado, para qualquer quadrado do tabuleiro. A função separa as diagonais em diagonais direitas e diagonais esquerdas também, agrupando elas em retas para usar. Eu acabei de perceber que isso provavelmente implica em uma refatoração do meu código, mais especificamente na minha estrutura de validação de jogadas. Essa refatoração só vai ser avaliada depois de eu terminar a dama, já demorei tempo demais.
+
+(Agora que eu uso branches acho que faz mais sentido para a documentação também listar onde eu estou).
+
+Fora isso eu descobri a função all() no python, que é excelente para o meu desenvolvimento das rainhas.
+
+
+## Update #5
+
+### Damas 1.0
+
+Hoje eu terminei.
+
+Minha última grande barreira era a checagem de jogadas válidas em diagonais, quando a peça é uma rainha. Mesmo ambas strings e listas sendo iteráveis, eu estava tendo bastante dificuldade e usar as listas para checar diagonais com jogadas válidas, parece uma certa "gambiarra" mas consegui resolver com strings.
+
+A lista diagonais_booleanas agora é uma string, utilizada tanto pela come_mais() como pela jogada_rainha(), fazendo a validação para tiles vazios e com peças. Se a jogada é de fato válida, a string permite que as funções alterem os valores booleanos e/ou efetuam as jogadas. Testes premiliminares indicam estar tudo certo com a configuração do jogo.
+
+Com isso, oficialmente lanço a versão 1.0 das damas fodas do pedro foda. 
+
+### Futuro (Fora de Ordem)
+
+- [ ] Análise para possível refatoração e restruturação (Demorado e chato, vou adiar um pouco)
+- [ ] Inserção de imagens como _visual aids_ na seção de regras (Não tão demorado e nem tão chato)
+- [ ] Implementação de regras de empate no código, assim como dar a opção do jogador desistir ou pedir um empate (Meio demorado e nem tão chato?)
+- [ ] Tratamento de input, para evitar a interrupçãodo jogo abruptamente, causando sua perda consequentemente. (Demorado? e chato)
+- [ ] Esturação final do readme do repositório, com imagens, gifs etc. (Demorado e chato) 
+- [ ] (Bonus) Impressão de um gif com todas as jogadas da partida, ao término de uma. (Demorado e maneiro?)
