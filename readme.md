@@ -1,69 +1,48 @@
 # Damas em py
 
-Damas fodas por Pedro Foda (2 de 4 jogo no roadmap dos jogos):
+Damas em python para dois jogadores no terminal
+- [Damas em py](#damas-em-py)
+- [Como Jogar](#como-jogar)
+- [Updates](#updates)
+  - [1.1.0 - Tabuleiro Update](#110---tabuleiro-update)
+    - [Novo Tabuleiro](#novo-tabuleiro)
+    - [Novas Regras](#novas-regras)
+  - [1.0.0 - Lançamento Damas](#100---lançamento-damas)
+- [Futuro (Fora de Ordem)](#futuro-fora-de-ordem)
 
-A adaptação visual que queria antes vai ficar para o xadrez, estipulando uma lógica mental basica parece mais fácil com POO(?) e com alguma biblioteca, coisas que me privei de usar ao programar as damas. POO não me pareceu muito útil e as bibliotecas eu teria que ficar pesquisando, parece que eu ia perder muito tempo para montar um frankenstein.
+![Partida](Imagens/partida.gif)
 
-## Update #1
+# Como Jogar
 
-uhhhhh eu não upei meu progresso anterior no git, então eu vou listar os problemas que eu tive (i.e. problemas que eu demorei mais de dia para resolver) até aqui e as soluções que eu encontrei (vou tentar fazer em ordem cronológica).
+- Instale Python 3 e Visual Studio Code na sua máquina
+- Abra main.py e rode o programa
 
-### Montagem do tabuleiro
+# Updates
 
-Tecnicamente, eu tive um problema no começo, que por algum motivo eu decidi usar um dicionário invés de listas dentro de listas (sei la). Depois de tentar fazer os dicionarios funcionarem com alguns algoritmos e funções, eu desisti e recomecei.
+## 1.1.0 - Tabuleiro Update
 
-### Problemas com diagonais
+- Imagens do tabuleiro inseridas nas Regras
+- Pequenas mudanças na estrutura dos arquivos e no código
+- Novo Tabuleiro implementado 
 
-No começo, eu queria fazer uma validação de jogadas baseada no cálculo de diagonais. Acontece que o código ficou muito confuso e por mais que eu tenha até que chego num código simples no final, uma parte das diagonais não parava de dar problemas. Eu resolvi esse problema mudando o algoritmo para calcular distâncias, definindo condicionais de contorno, para evitar out of range causado por operações na acessa_tile().
+### Novo Tabuleiro
 
-### Algum problema estranho com variáveis
+![Tabuleiro](Imagens/tabuleiro.png)
 
-Eu tenho algum problema atribuindo variáveis globais nas funções, especificamente, as que envolvem o jogador. É algo simples, mas eu não sei se a solução que eu encontrei é de fato a certa (parece ser pelas páginas do stack q eu li). Esse é um problema mais teórico do que prático e na verdade mesmo, está mais para um incomo do que um problema de verdade.
+### Novas Regras
 
-### constroi_"linha"()
+![Regras](Imagens/regras.png)
 
-Só por causa de uma inversão no resultado da come_mais() eu percebi que a constroi_linha() construia colunas. Não foi nada de mais, mas o problema é que como essa foi a PRIMEIRA FUNÇÃO que eu fiz (até porque eu preciso do tabuleiro antes de tudo), talvez nem mude muita coisa, mas vou ter que revisar tudo e fazer os ajustes necessários (aproveitei para finalmente upar tudo no git e abrir uma branch para isso).
+## 1.0.0 - Lançamento Damas
 
-## Update #2
+- Damas completamente jogáveis para dois jogadores
+- Menu para consulta de regras antes do jogo
+- Nomes customizados para cada jogador
 
-Problemas concertados até aqui, o jogo roda normalmente, sem promover peças. Agora eu vou começar a desenvolver as ações da rainha. A minha ideia é inicial se baseia em ver até onde vão as 4 diagonais e o que tem nelas, quase como eu faço com a analisa jogada. Talvez seja bom modularizar mais o código para fazer com que as funções funcionem com ambas as peças.
+# Futuro (Fora de Ordem)
 
-## Update #3
-
-Agora que eu tenho o jogo em git, eu consigo escrever uma "documentação" mais detalhada, mesmo já próximo (espero eu) da conclusão do jogo. Além dessa parte mecânica, eu gostaria de estruturar a parte das regras com imagens do tabuleiro - que não deve ser algo muito complexo, apenas trabalhoso.
-
-### Desenvolvimento teórico inicial das interações da rainha com o tabuleiro
-
-A rainha tem interações únicas para tanto para movimentação quanto para comer peças. Resumidamente, a Rainha pode se movimentar livremente pelas diagonais delimitadas por peças da mesma cor, ou por diagonais com somente uma peça da cor oposta. Depois caso a rainha coma uma peça da cor oposta, é preciso analisar se há outras oportunidades de comer outras peças
-
-## Update #4
-
-### Nova diagonal() (Branch Rainhas)
-
-Hoje eu consegui desenvolver um algoritmo que retona todas as diagonais de um quadrado, para qualquer quadrado do tabuleiro. A função separa as diagonais em diagonais direitas e diagonais esquerdas também, agrupando elas em retas para usar. Eu acabei de perceber que isso provavelmente implica em uma refatoração do meu código, mais especificamente na minha estrutura de validação de jogadas. Essa refatoração só vai ser avaliada depois de eu terminar a dama, já demorei tempo demais.
-
-(Agora que eu uso branches acho que faz mais sentido para a documentação também listar onde eu estou).
-
-Fora isso eu descobri a função all() no python, que é excelente para o meu desenvolvimento das rainhas.
-
-
-## Update #5
-
-### Damas 1.0
-
-Hoje eu terminei.
-
-Minha última grande barreira era a checagem de jogadas válidas em diagonais, quando a peça é uma rainha. Mesmo ambas strings e listas sendo iteráveis, eu estava tendo bastante dificuldade e usar as listas para checar diagonais com jogadas válidas, parece uma certa "gambiarra" mas consegui resolver com strings.
-
-A lista diagonais_booleanas agora é uma string, utilizada tanto pela come_mais() como pela jogada_rainha(), fazendo a validação para tiles vazios e com peças. Se a jogada é de fato válida, a string permite que as funções alterem os valores booleanos e/ou efetuam as jogadas. Testes premiliminares indicam estar tudo certo com a configuração do jogo.
-
-Com isso, oficialmente lanço a versão 1.0 das damas fodas do pedro foda. 
-
-### Futuro (Fora de Ordem)
-
-- [ ] Análise para possível refatoração e restruturação (Demorado e chato, vou adiar um pouco)
-- [ ] Inserção de imagens como _visual aids_ na seção de regras (Não tão demorado e nem tão chato)
-- [ ] Implementação de regras de empate no código, assim como dar a opção do jogador desistir ou pedir um empate (Meio demorado e nem tão chato?)
-- [ ] Tratamento de input, para evitar a interrupçãodo jogo abruptamente, causando sua perda consequentemente. (Demorado? e chato)
-- [ ] Esturação final do readme do repositório, com imagens, gifs etc. (Demorado e chato) 
-- [ ] (Bonus) Impressão de um gif com todas as jogadas da partida, ao término de uma. (Demorado e maneiro?)
+- [ ] Análise para possível refatoração e restruturação
+- [X] Inserção de imagens como _visual aids_ na seção de regras
+- [ ] Implementação de regras de empate no código, assim como dar a opção do jogador desistir ou pedir um empate
+- [ ] Tratamento de input, para evitar a interrupçãodo jogo abruptamente, causando sua perda consequentemente.
+- [X] Esturação final do readme do repositório, com imagens, histórico de updates etc.

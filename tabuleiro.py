@@ -43,16 +43,16 @@ def faz_tabuleiro():
 
 def imprime_tabuleiro():
     
-    pecas_imagem = {'0': ' ⛀ ',    #0
-                     '1': ' ⛃ ',   #1
-                     '2': ' ⛂ ',   #2
-                     '3': ' ⛃ ',   #3
-                     '4': '    ',   #4
-                     '10':'|⛀ |',  #10
-                     '11':'|⛁ |',  #11
-                     '12':'|⛂ |',  #12
-                     '13':'|⛃ |',  #13
-                     '14':'||||'    #14
+    pecas_imagem = {'0': ' ⛀ ',    #Peça Branca no Quadrado Branco
+                     '1': ' ⛃ ',   #Rainha Branca no Quadrado Branco
+                     '2': ' ⛂ ',   #Peça Preta no Quadrado Branco
+                     '3': ' ⛃ ',   #Rainha Preta no Quadrado Branco
+                     '4': '    ',   #Quadrado Branco Vazio
+                     '10':'|⛀ |',  #Peça Branca no Quadrado Preto
+                     '11':'|⛁ |',  #Rainha Branca no Quadrado Preto
+                     '12':'|⛂ |',  #Peça Preta no Quadrado Preto
+                     '13':'|⛃ |',  #Rainha Preta no Quadrado Preto
+                     '14':'||||'    #Quadrado Branco Preto
     }
 
     pecas_texto = ['Peça Branca', 'Rainha Branca','Peça Preta','Rainha Preta','Vazio'] #0,1,2,3,4

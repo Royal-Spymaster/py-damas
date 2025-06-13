@@ -2,16 +2,16 @@
 import tabuleiro as tb
 
 #----------Variáveis Globais----------
-
 jogador = 0
 diagonais_direitas = []
 diagonais_esquerdas = []
 diagonais_fatiadas = []
 diagonais_booleanas = ''
 diagonal = []
+origem = ''
+destino = ''
 
 #----------Manipulação do Tabuleiro----------
-
 def acessa_tile(tile, i_linha = 0, j_coluna = 0, index = 0):
 
     for linha in range(8):
@@ -86,7 +86,6 @@ def all_string_zero(lista):
     return booleano
 
 #----------Diagonais----------
-
 def cria_diagonais(tile):
     global diagonais_esquerdas        
     global diagonais_direitas
@@ -158,8 +157,9 @@ def molda_diagonal(origem,destino):
     fatia_diagonais(origem,diagonais_esquerdas)
 
 #----------Definição das jogadas----------
-
 def define_jogada(jogada):
+    global origem
+    global destino
     origem = jogada[:2]
     destino = jogada[3:]
     molda_diagonal(origem,destino)
