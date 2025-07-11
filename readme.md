@@ -14,7 +14,7 @@ Damas em python para dois jogadores no terminal
 
 # Como Jogar
 
-- Instale Python 3 e Visual Studio Code na sua máquina
+- Instale as últimas versões do Python e do Visual Studio Code na sua máquina
 - Abra main.py e rode o programa
 
 # Updates
